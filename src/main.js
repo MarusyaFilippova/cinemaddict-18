@@ -5,6 +5,8 @@ import MainNavigationView from "./view/main-navigation-view";
 import SortView from "./view/sort-view";
 import StatisticsView from "./view/statistics-view";
 import FilmDetailsView from "./view/film-details-view";
+import MoviesModel from "./model/movies-modal";
+const moviesModel = new MoviesModel();
 
 const siteHeaderElement = document.querySelector('.header');
 const siteMainElement = document.querySelector('.main');
@@ -17,8 +19,8 @@ render(new ProfileView(), siteHeaderElement);
 render(new MainNavigationView(), siteMainElement);
 render(new SortView(), siteMainElement);
 
-filmPresenter.init(siteMainElement);
+filmPresenter.init(siteMainElement, moviesModel);
 
 render(new StatisticsView(), footerStatisticsElement);
 
-// render(new FilmDetailsView(), siteFooterElement, RenderPosition.AFTEREND);
+render(new FilmDetailsView(moviesModel.films[0]), siteFooterElement, RenderPosition.AFTEREND);
