@@ -5,24 +5,22 @@ import FilmCardView from "../view/film-card-view";
 import ShowMoreButtonView from "../view/show-more-button-view";
 import FilmsListContainerView from "../view/films-list-container-view";
 
-const FILM_AMOUNT = 5;
-
 export default class FilmPresenter {
   filmsComponent = new FilmsView();
   filmsListComponent = new FilmsListView();
   filmsListContainer = new FilmsListContainerView();
 
-  init = (filmContainer) => {
+  init = (filmContainer, moviesModel) => {
     this.filmContainer = filmContainer;
+    this.MoviesModel = moviesModel;
+    this.films = [...this.MoviesModel.films];
 
     render(this.filmsComponent, this.filmContainer);
-    render(this.filmsListComponent, this.filmsComponent.getElement())
-    render(this.filmsListContainer, this.filmsListComponent.getElement())
+    render(this.filmsListComponent, this.filmsComponent.element)
+    render(this.filmsListContainer, this.filmsListComponent.element)
 
-    for (let i = 0; i < FILM_AMOUNT; i++) {
-      render(new FilmCardView(), this.filmsListContainer.getElement())
-    }
+    this.films.forEach((film) => render(new FilmCardView(film), this.filmsListContainer.element));
 
-    render(new ShowMoreButtonView(), this.filmsListComponent.getElement());
+    render(new ShowMoreButtonView(), this.filmsListComponent.element);
   }
 }
