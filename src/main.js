@@ -1,10 +1,9 @@
-import {render, RenderPosition} from './render.js';
+import {render} from './render.js';
 import FilmPresenter from "./presenter/film-presenter";
 import ProfileView from "./view/profile-view";
 import MainNavigationView from "./view/main-navigation-view";
 import SortView from "./view/sort-view";
 import StatisticsView from "./view/statistics-view";
-import FilmDetailsView from "./view/film-details-view";
 import MoviesModel from "./model/movies-modal";
 const moviesModel = new MoviesModel();
 
@@ -22,5 +21,3 @@ render(new SortView(), siteMainElement);
 filmPresenter.init(siteMainElement, moviesModel);
 
 render(new StatisticsView(), footerStatisticsElement);
-
-render(new FilmDetailsView(moviesModel.films[0]), siteFooterElement, RenderPosition.AFTEREND);
